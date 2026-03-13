@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
+app.use('/stickers', express.static('stickers'));
 
 // Multer setup for file uploads
 const storage = multer.diskStorage({
@@ -49,6 +50,14 @@ io.on('connection', (socket) => {
 
   socket.on('image message', (data) => {
     io.emit('image message', { username: socket.username, filename: data.filename, timestamp: new Date() });
+  });
+
+  socket.on('sticker message', (data) => {
+    io.emit('sticker message', { username: socket.username, src: data.src, timestamp: new Date() });
+  });
+
+  socket.on('gif message', (data) => {
+    io.emit('gif message', { username: socket.username, url: data.url, timestamp: new Date() });
   });
 
   socket.on('disconnect', () => {

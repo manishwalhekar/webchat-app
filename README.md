@@ -6,7 +6,9 @@ A real-time messaging web app with chat and image sharing, similar to WhatsApp.
 
 - Real-time chat using WebSocket
 - Image sharing
-- Simple UI
+- Emoji picker
+- Sticker sharing (add your own stickers to `stickers/` folder)
+- GIF search and sharing (using Tenor API)
 
 ## Setup
 
@@ -15,12 +17,23 @@ A real-time messaging web app with chat and image sharing, similar to WhatsApp.
    npm install
    ```
 
-2. Run the server:
+2. Add sticker images to `stickers/` folder (e.g., sticker1.png, sticker2.png)
+
+3. Run the server:
    ```
    npm start
    ```
 
 3. Open `http://localhost:3000` in your browser.
+
+## Usage
+
+- Enter username
+- Type messages or use emoji button for emojis
+- Use sticker button to select stickers
+- Use GIF button to search and send GIFs
+- Upload images as before
+- Messages appear in real-time
 
 ## Deployment on AWS EC2
 
@@ -28,8 +41,7 @@ A real-time messaging web app with chat and image sharing, similar to WhatsApp.
 
 2. Install Node.js:
    ```
-   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-   sudo apt-get install -y nodejs
+   
    ```
 
 3. Clone or upload your project to the instance.
