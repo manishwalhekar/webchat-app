@@ -102,8 +102,12 @@ messageInput.addEventListener('keypress', (e) => {
 
 sendButton.addEventListener('click', () => {
   if (!username) {
-    alert('Please enter a username first.');
-    return;
+    username = usernameInput.value.trim();
+    if (!username) {
+      alert('Please enter a username first.');
+      return;
+    }
+    socket.emit('join', username);
   }
   const message = messageInput.value.trim();
   if (message) {
@@ -143,19 +147,23 @@ function uploadImage(file) {
 }
 
 socket.on('chat message', (data) => {
-  addMessage(data.username, data.message, 'received');
+  const type = data.username === username ? 'sent' : 'received';
+  addMessage(data.username, data.message, type);
 });
 
 socket.on('image message', (data) => {
-  addImageMessage(data.username, data.filename, 'received');
+  const type = data.username === username ? 'sent' : 'received';
+  addImageMessage(data.username, data.filename, type);
 });
 
 socket.on('sticker message', (data) => {
-  addStickerMessage(data.username, data.src, 'received');
+  const type = data.username === username ? 'sent' : 'received';
+  addStickerMessage(data.username, data.src, type);
 });
 
 socket.on('gif message', (data) => {
-  addGifMessage(data.username, data.url, 'received');
+  const type = data.username === username ? 'sent' : 'received';
+  addGifMessage(data.username, data.url, type);
 });
 
 socket.on('user joined', (user) => {
