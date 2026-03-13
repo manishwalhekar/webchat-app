@@ -7,6 +7,7 @@ const sendButton = document.getElementById('send');
 const emojiBtn = document.getElementById('emoji-btn');
 const stickerBtn = document.getElementById('sticker-btn');
 const gifBtn = document.getElementById('gif-btn');
+const imageBtn = document.getElementById('image-btn');
 const emojiPicker = document.getElementById('emoji-picker');
 const stickerPicker = document.getElementById('sticker-picker');
 const gifSearch = document.getElementById('gif-search');
@@ -29,6 +30,10 @@ emojiBtn.addEventListener('click', () => {
   togglePicker(emojiPicker);
 });
 
+imageBtn.addEventListener('click', () => {
+  imageInput.click();
+});
+
 stickerBtn.addEventListener('click', () => {
   togglePicker(stickerPicker);
 });
@@ -48,6 +53,10 @@ function togglePicker(picker) {
 // Sticker
 document.querySelectorAll('.sticker').forEach(sticker => {
   sticker.addEventListener('click', () => {
+    if (!username) {
+      alert('Please enter a username first.');
+      return;
+    }
     const src = sticker.dataset.src;
     socket.emit('sticker message', { src });
     stickerPicker.style.display = 'none';
@@ -63,29 +72,39 @@ searchGifBtn.addEventListener('click', () => {
 });
 
 function searchGifs(query) {
-  fetch(`https://api.tenor.com/v1/search?q=${encodeURIComponent(query)}&key=LIVDSRZULELA&limit=10`)
+  fetch(`https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${encodeURIComponent(query)}&limit=10`)
     .then(response => response.json())
     .then(data => {
       gifResults.innerHTML = '';
-      data.results.forEach(gif => {
+      data.data.forEach(gif => {
         const img = document.createElement('img');
-        img.src = gif.media[0].gif.url;
+        img.src = gif.images.fixed_height_small.url;
         img.classList.add('gif-thumb');
         img.addEventListener('click', () => {
-          socket.emit('gif message', { url: gif.media[0].gif.url });
+          if (!username) {
+            alert('Please enter a username first.');
+            return;
+          }
+          socket.emit('gif message', { url: gif.images.original.url });
           gifSearch.style.display = 'none';
         });
         gifResults.appendChild(img);
       });
-    });
+    })
+    .catch(err => console.error('GIF search error:', err));
 }
 
-usernameInput.addEventListener('change', () => {
-  username = usernameInput.value;
-  socket.emit('join', username);
+messageInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    sendButton.click();
+  }
 });
 
 sendButton.addEventListener('click', () => {
+  if (!username) {
+    alert('Please enter a username first.');
+    return;
+  }
   const message = messageInput.value.trim();
   if (message) {
     socket.emit('chat message', { message });

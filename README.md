@@ -17,7 +17,7 @@ A real-time messaging web app with chat and image sharing, similar to WhatsApp.
    npm install
    ```
 
-2. Add sticker images to `stickers/` folder (e.g., sticker1.png, sticker2.png)
+2. Add sticker images to `stickers/` folder (e.g., sticker1.png, sticker2.png). You can find free sticker packs online or create your own.
 
 3. Run the server:
    ```
