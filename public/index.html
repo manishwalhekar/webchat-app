@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web Chat</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.2/dist/index.css">
 </head>
 <body>
   <div class="container">
@@ -15,27 +14,10 @@
     <div class="input-container">
       <input type="text" id="username" placeholder="Enter username" />
       <input type="text" id="message" placeholder="Type a message..." />
-      <button id="emoji-btn">😀</button>
-      <button id="image-btn">📷</button>
-      <button id="sticker-btn">📸</button>
-      <button id="gif-btn">GIF</button>
-      <input type="file" id="image" accept="image/*" style="display:none;" />
       <button id="send">Send</button>
-    </div>
-    <div id="emoji-picker" style="display:none;"></div>
-    <div id="sticker-picker" style="display:none;">
-      <img src="/stickers/sticker1.png" class="sticker" data-src="/stickers/sticker1.png" />
-      <img src="/stickers/sticker2.png" class="sticker" data-src="/stickers/sticker2.png" />
-      <!-- Add more stickers -->
-    </div>
-    <div id="gif-search" style="display:none;">
-      <input type="text" id="gif-query" placeholder="Search GIFs" />
-      <button id="search-gif">Search</button>
-      <div id="gif-results"></div>
     </div>
   </div>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.18.2/dist/index.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
