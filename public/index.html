@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="chat-container">
+      <div id="messages"></div>
+    </div>
+    <div class="input-container">
+      <input type="text" id="username" placeholder="Enter username" />
+      <input type="text" id="message" placeholder="Type a message..." />
+      <input type="file" id="image" accept="image/*" />
+      <button id="send">Send</button>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
